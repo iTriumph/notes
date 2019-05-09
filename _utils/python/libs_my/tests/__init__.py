@@ -5,7 +5,7 @@
 导入公用类库 及 必要的第三方库
 
 Created on 2015/11/17
-Updated on 2016/8/9
+Updated on 2019/5/9
 @author: Holemar
 '''
 import os
@@ -21,8 +21,8 @@ except:pass
 
 # 导入运行环境
 dirname = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(1, dirname + '/..')
-sys.path.insert(2, dirname + '/../../libs')
+sys.path.insert(1, dirname + '/../..')
+sys.path.insert(2, dirname + '/../../../libs')
 
 # 尝试定义 django 的配置，因为涉及 django 的测试，必须要先定义配置，否则会出异常。
 try:

@@ -24,7 +24,7 @@ from django.views.decorators.cache import cache_page
 
 
 # 如果有redis服务器的，则定义缓存配置信息。没有则使用默认的内存缓存
-if True:
+if False:
     settings.CACHES = {
         "default": {
             "BACKEND": "django_redis.cache.RedisCache",
