@@ -74,7 +74,7 @@ self 参数
     class A(object):
         a = 5
 
-        # 如果 __repr__、 __str__、 __unicode__ 只想写一个的话，建议写 __repr__，因为 str/unicode/repr 函数都会调用到
+        # 如果 __repr__, __str__, __unicode__ 只想写一个的话，建议写 __repr__, 因为 str/unicode/repr 函数都会调用到
         def __repr__(self):return 'repr:%s' % self.a
 
         def __str__(self):return 'str:%s' % self.a
@@ -94,19 +94,28 @@ __init__ 方法
     注意, 这个名称的开始和结尾都是双下划线。( __init__ 方法类似于C++、C#和Java中的 constructor )
 
 __new__ 方法
-    创建对象时调用, 返回当前对象的一个实例
+    创建对象前，先创建的类实例调用, 返回当前对象的一个类实例。
+    __new__ 方法的调用是发生在 __init__ 之前的。先是 __new__ 创建了 类实例，然后才可以用 __init__ 初始化实例。
+    __new__() 方法始终都是类的静态方法，即使没有被加上静态方法装饰器。
 
 
     例:
-    class Person:
+    class Person(object): # 注：py2的旧类不执行 __new__, 得用
+
+        def __new__(cls, name):
+            print('NEW ', name)
+            return super(Person, cls).__new__(cls)
+
         def __init__(self, name):
+            print('INIT ', name)
             self.test_name = name
+
         def sayHi(self):
             print('Hello, my name is ' + self.test_name)
             self.test = 'sss'  # 属性可以随处定义,不需事先定义
             print('the test is ' + self.test)
 
-    p = Person('Swaroop')
+    p = Person('Swaroop') # 先打印 NEW, 然后再打印 INIT
     p.sayHi() # 打印: Swaroop , sss
     print('the Person test is ' + p.test) # 打印: sss
     p.test2 = 'haha...'
@@ -125,6 +134,33 @@ __new__ 方法
     __add__(self,other)当使用 加 运算符 (+) 的时候调用。
     __getitem__(self,key) 使用x[key]索引操作符的时候调用。
     __len__(self) 对序列对象使用内建的 len() 函数的时候调用。
+
+
+__new__ 的作用
+    依照Python官方文档的说法， __new__ 方法主要是当你继承一些不可变的 class 时(比如 int, str, tuple)， 提供给你一个自定义这些类的实例化过程的途径。
+    另一个作用就是实现类的自定义的 metaclass 。
+    首先我们来看一下第一个功能，具体我们可以用int来作为一个例子：
+    假如我们需要一个永远都是正数的整数类型，通过集成int，我们可能会写出这样的代码。
+
+        class PositiveInteger(int):
+            def __init__(self, value):
+                super(PositiveInteger, self).__init__(self, abs(value))
+
+        i = PositiveInteger(-3)
+        print(i)
+
+    但运行后会发现，结果根本不是我们想的那样，我们任然得到了-3。
+    这是因为对于 int 这种 不可变的对象，我们只有重载它的 __new__ 方法才能起到自定义的作用。
+    这是修改后的代码：
+
+        class PositiveInteger(int):
+            def __new__(cls, value):
+                return super(PositiveInteger, cls).__new__(cls, abs(value))
+
+        i = PositiveInteger(-3)
+        print(i)
+
+    通过重载 __new__ 方法，我们实现了需要的功能。
 
 
 类变量,容易出错的:
