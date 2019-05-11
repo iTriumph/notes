@@ -5,6 +5,6 @@
 目前只考虑 py2.6 ~ py2.7 版本的使用，不保证兼容其它版本
 
 Created on 2015/11/17
-Updated on 2016/8/9
+Updated on 2019/5/11
 @author: Holemar
 """
