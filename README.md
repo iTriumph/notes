@@ -1,6 +1,6 @@
 # 笔记内容
 
-> ### [编程语言](.)
+> ### [编程语言](#)
 >> [python](./01.Python/)  
 >> [java](./05.Java/)   
 >> [Asp.net (C#)](./06.Asp.net/)  
@@ -20,7 +20,7 @@
 >> [nginx](./03.Web/nginx/)  
 
 > ### [工具类](./_utils/)
->> [python](./_utils/python/)  
+>> [python](./_utils/python/libs_my/)  
 >> [javascript](./_utils/js/)  
 >> [java](./_utils/java/)  
 >> [Jsp](./_utils/Jsp/)  
@@ -30,7 +30,7 @@
 >> [Linux](./07.System/Linux/)   
 >> [Windows](./07.System/Windows/)    
 
-> ### [其他内容](.)
+> ### [其他内容](#)
 >> [编程思想](./04.思想/)   
 >> [Ofiice](./09.Ofiice/)    
 >> [git](./99.Other/git.sh)    
