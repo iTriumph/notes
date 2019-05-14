@@ -439,6 +439,19 @@
         $ git remote  # 查看 remote
         $ git remote rm project1  # 删除 remote
 
+    3. 设置和取消代理
+       设置代理(走ss代理):
+       git config --global http.proxy 'socks5://127.0.0.1:1080'
+       git config --global https.proxy 'socks5://127.0.0.1:1080'
+
+       走HTTP的代理:
+       git config --global http.proxy 'http://127.0.0.1:1080'
+       git config --global https.proxy 'https://127.0.0.1:1080'
+
+       取消代理:
+       git config --global --unset http.proxy
+       git config --global --unset https.proxy
+
 
 五、Git Commands
     1. 系统设置
