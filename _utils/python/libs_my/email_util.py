@@ -134,13 +134,13 @@ def send_mail(host, user, password, to_list, **kwargs):
 if __name__ == '__main__':
     #错误信息邮件通知配置
     host = "smtp.163.com"
-    user = "daillo@163.com"
-    password = "01A0519163!@"
+    user = "xxxxx@163.com"
+    password = "123456"
     text = """这是测试内容,见到请忽略...<br/>
     html代码测试：<font color='red'>红色字体</font>
     """
     params = {
-        'From': u"测试邮件<daillo@163.com>" , # 这里可以任意设置，收到信后，将按照设置显示收件人
+        'From': u"测试邮件<oaxxx@163.com>" , # 这里可以任意设置，收到信后，将按照设置显示收件人
         'Subject': u"测试邮件。。。",
         #'Cc': '415372820@qq.com', # 抄送人
         'html': text, # 邮件内容
@@ -150,7 +150,7 @@ if __name__ == '__main__':
             'C:\\WebDisk2\\_同步\\picture_同步\\桌面\\1(3).jpg',
         ],
     }
-    mail_to_list = ["292598441@qq.com", '收信 <daillo@qq.com>'] # 收信人,发多个人需要用列表,只用字符串则只发第一个
+    mail_to_list = ["xxxxx@qq.com", '收信 <sssss@qq.com>'] # 收信人,发多个人需要用列表,只用字符串则只发第一个
     res = send_mail(host, user, password, mail_to_list, **params)
     if res:
         print "发送成功"
