@@ -139,13 +139,14 @@ Python单例模式的实现方法
     #本质上是方法2的升级（或者说高级）版
     class Singleton(type):
         # __init__ 会先于 __call__ 执行， 且首参数 cls 是 MyClass类 而不是 MyClass类实例(因为这是元类)。只在定义 MyClass类 时执行一次，后续不再执行。
+        # 这里的 __init__ 是多余的，留着仅供参考
         def __init__(cls, name, bases, dct):
             super(Singleton, cls).__init__(name, bases, dct)
             cls._instance = None
 
         # 每次 new MyClass类 时都会执行， 且首参数 cls 是 MyClass类 而不是 MyClass类实例(因为这是元类)。
         def __call__(cls, *args, **kw):
-            if cls._instance is None:
+            if not hasattr(cls, '_instance'):
                 cls._instance = super(Singleton, cls).__call__(*args, **kw)
             return cls._instance
 
