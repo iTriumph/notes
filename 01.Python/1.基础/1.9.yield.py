@@ -22,10 +22,11 @@ Iterator(迭代器)
 
 
 #当然我们完全没有必要先把所有的元素都算出来放到一个 list 里或者其他容器类里进行循环，这样比较浪费空间。我们可以直接创建自己的一个迭代器。
-class Fib:
+class Fib(object):
     '''''一个可以生成Fibonacci 数列的迭代器'''
 
     def __init__(self, max):
+        # max 是指返回的最大值，而不是返回多少个数字
         self.max = max
 
     def __iter__(self):
@@ -34,10 +35,10 @@ class Fib:
         return self
 
     def next(self):
+        self.a, self.b = self.b, self.a + self.b
         fib = self.a
         if fib > self.max:
             raise StopIteration
-        self.a, self.b = self.b, self.a + self.b
         return fib
 
 for n in Fib(1000):
@@ -57,10 +58,11 @@ Generator(生成器)
 
 
     def fib(max):
+        # max 是指返回的最大值，而不是返回多少个数字
         a, b = 0, 1
-        while a < max:
-            yield a
+        while b < max:
             a, b = b, a + b
+            yield a
 
     #fib函数使用了 yield 所以它是一个生成器函数，当我们调用fib(1000)的时候它其实是返回了一个迭代器，且这个迭代器可以控制生成器函数的运行。
     #我们通过这个返回的迭代器的动作控制fib这个生成器函数的运行。
@@ -89,16 +91,22 @@ Generator(生成器)
     比如：
 
     def h():
-        print 'Wen Chuan'
-        yield 5
-        print 'Fighting!'
+        print 'one'
+        yield 1
+        print 'tow'
+        yield 2
+        print 'three'
+        yield 3
 
     c = h()
     print c.next()
     print c.next()
+    print c.next()
+    print c.next()
 
     调用后，h()开始执行，直到遇到
-    yield 5结束，因此输出结果：???
+    yield 1 结束，因此输出结果：???
+    yield 相当于 return, 然后再继续往下执行。
 
 
 4.send(msg)
